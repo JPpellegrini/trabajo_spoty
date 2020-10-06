@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>358</width>
-    <height>368</height>
+    <width>378</width>
+    <height>511</height>
    </rect>
   </property>
   <property name="palette">
@@ -420,7 +420,7 @@ QPushButton:hover{background-color: #4d514d;color: white;}</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../icons/png/lupa2.png</normaloff>../icons/png/lupa2.png</iconset>
+          <normaloff>../icons/png/lupa3.png</normaloff>../icons/png/lupa3.png</iconset>
         </property>
         <property name="flat">
          <bool>false</bool>
@@ -450,7 +450,11 @@ border-radius: 15px;}
 QPushButton:hover{background-color: #4d514d;color: white;}</string>
         </property>
         <property name="text">
-         <string>&lt;&lt;</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/png/retroceder.png</normaloff>../icons/png/retroceder.png</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -473,7 +477,11 @@ border-radius: 15px;}
 QPushButton:hover{background-color: #4d514d;color: white;}</string>
         </property>
         <property name="text">
-         <string>| |</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/png/pausa2.png</normaloff>../icons/png/pausa2.png</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -496,7 +504,11 @@ border-radius: 15px;}
 QPushButton:hover{background-color: #4d514d;color: white;}</string>
         </property>
         <property name="text">
-         <string>|&gt;</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/png/play2.png</normaloff>../icons/png/play2.png</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -519,7 +531,11 @@ border-radius: 15px;}
 QPushButton:hover{background-color: #4d514d;color: white;}</string>
         </property>
         <property name="text">
-         <string>&gt;&gt;</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../icons/png/avanzar2.png</normaloff>../icons/png/avanzar2.png</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>
