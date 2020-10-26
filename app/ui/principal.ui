@@ -530,5 +530,93 @@ QPushButton:hover{background-color: #4d514d;}</string>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>boton_buscar</sender>
+   <signal>clicked()</signal>
+   <receiver>reproductor</receiver>
+   <slot>on_clicked_buscar()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>307</x>
+     <y>154</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>boton_anterior</sender>
+   <signal>clicked()</signal>
+   <receiver>reproductor</receiver>
+   <slot>on_clicked_anterior()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>48</x>
+     <y>472</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>boton_pausa</sender>
+   <signal>clicked()</signal>
+   <receiver>reproductor</receiver>
+   <slot>on_clicked_pausa()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>132</x>
+     <y>472</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>boton_play</sender>
+   <signal>clicked()</signal>
+   <receiver>reproductor</receiver>
+   <slot>on_clicked_play()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>216</x>
+     <y>472</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>boton_siguiente</sender>
+   <signal>clicked()</signal>
+   <receiver>reproductor</receiver>
+   <slot>on_clicked_siguiente()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>300</x>
+     <y>472</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>on_clicked_buscar()</slot>
+  <slot>on_clicked_anterior()</slot>
+  <slot>on_clicked_pausa()</slot>
+  <slot>on_clicked_play()</slot>
+  <slot>on_clicked_siguiente()</slot>
+ </slots>
 </ui>
