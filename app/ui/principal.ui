@@ -415,17 +415,11 @@ border-radius: 15px;</string>
       <item>
        <widget class="QPushButton" name="boton_buscar">
         <property name="styleSheet">
-         <string notr="true">QPushButton{color: white;
+         <string notr="true">QPushButton{
 font-size: 15px;
-font-weight: 500;
 padding: 0.5em 1.2em;
-background: rgba(0,0,0,0);
-border: 0px solid;
-border-color: #4d514d;
-transition: all 1s ease;
-position: relative;
 border-radius: 15px;}
-QPushButton:hover{background-color: #4d514d;color: white;}</string>
+QPushButton:hover{background-color: #4d514d;}</string>
         </property>
         <property name="text">
          <string/>
@@ -449,17 +443,11 @@ QPushButton:hover{background-color: #4d514d;color: white;}</string>
       <item>
        <widget class="QPushButton" name="boton_anterior">
         <property name="styleSheet">
-         <string notr="true">QPushButton{color: white;
+         <string notr="true">QPushButton{
 font-size: 15px;
-font-weight: 500;
 padding: 0.5em 1.2em;
-background: rgba(0,0,0,0);
-border: 0px solid;
-border-color: #4d514d;
-transition: all 1s ease;
-position: relative;
 border-radius: 15px;}
-QPushButton:hover{background-color: #4d514d;color: white;}</string>
+QPushButton:hover{background-color: #4d514d;}</string>
         </property>
         <property name="text">
          <string/>
@@ -476,17 +464,11 @@ QPushButton:hover{background-color: #4d514d;color: white;}</string>
       <item>
        <widget class="QPushButton" name="boton_pausa">
         <property name="styleSheet">
-         <string notr="true">QPushButton{color: white;
+         <string notr="true">QPushButton{
 font-size: 15px;
-font-weight: 500;
 padding: 0.5em 1.2em;
-background: rgba(0,0,0,0);
-border: 0px solid;
-border-color: #4d514d;
-transition: all 1s ease;
-position: relative;
 border-radius: 15px;}
-QPushButton:hover{background-color: #4d514d;color: white;}</string>
+QPushButton:hover{background-color: #4d514d;}</string>
         </property>
         <property name="text">
          <string/>
@@ -503,17 +485,11 @@ QPushButton:hover{background-color: #4d514d;color: white;}</string>
       <item>
        <widget class="QPushButton" name="boton_play">
         <property name="styleSheet">
-         <string notr="true">QPushButton{color: white;
+         <string notr="true">QPushButton{
 font-size: 15px;
-font-weight: 500;
 padding: 0.5em 1.2em;
-background: rgba(0,0,0,0);
-border: 0px solid;
-border-color: #4d514d;
-transition: all 1s ease;
-position: relative;
 border-radius: 15px;}
-QPushButton:hover{background-color: #4d514d;color: white;}</string>
+QPushButton:hover{background-color: #4d514d;}</string>
         </property>
         <property name="text">
          <string/>
@@ -530,17 +506,11 @@ QPushButton:hover{background-color: #4d514d;color: white;}</string>
       <item>
        <widget class="QPushButton" name="boton_siguiente">
         <property name="styleSheet">
-         <string notr="true">QPushButton{color: white;
+         <string notr="true">QPushButton{
 font-size: 15px;
-font-weight: 500;
 padding: 0.5em 1.2em;
-background: rgba(0,0,0,0);
-border: 0px solid;
-border-color: #4d514d;
-transition: all 1s ease;
-position: relative;
 border-radius: 15px;}
-QPushButton:hover{background-color: #4d514d;color: white;}</string>
+QPushButton:hover{background-color: #4d514d;}</string>
         </property>
         <property name="text">
          <string/>
