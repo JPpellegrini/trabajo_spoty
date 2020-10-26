@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>reproductor</class>
+ <widget class="QMainWindow" name="reproductor">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -222,12 +222,12 @@
    </palette>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Reproductor</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="imagen_principal">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -258,7 +258,7 @@ border-radius: 15px;</string>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLineEdit" name="lineEdit">
+       <widget class="QLineEdit" name="linea_buscador">
         <property name="palette">
          <palette>
           <active>
@@ -413,7 +413,7 @@ border-radius: 15px;</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QPushButton" name="boton_buscar">
         <property name="styleSheet">
          <string notr="true">QPushButton{color: white;
 font-size: 15px;
@@ -442,12 +442,12 @@ QPushButton:hover{background-color: #4d514d;color: white;}</string>
      </layout>
     </item>
     <item>
-     <widget class="QListView" name="listView"/>
+     <widget class="QListWidget" name="lista"/>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="boton_anterior">
         <property name="styleSheet">
          <string notr="true">QPushButton{color: white;
 font-size: 15px;
@@ -474,7 +474,7 @@ QPushButton:hover{background-color: #4d514d;color: white;}</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="boton_pausa">
         <property name="styleSheet">
          <string notr="true">QPushButton{color: white;
 font-size: 15px;
@@ -501,7 +501,7 @@ QPushButton:hover{background-color: #4d514d;color: white;}</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_4">
+       <widget class="QPushButton" name="boton_play">
         <property name="styleSheet">
          <string notr="true">QPushButton{color: white;
 font-size: 15px;
@@ -528,7 +528,7 @@ QPushButton:hover{background-color: #4d514d;color: white;}</string>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="boton_siguiente">
         <property name="styleSheet">
          <string notr="true">QPushButton{color: white;
 font-size: 15px;
