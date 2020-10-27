@@ -248,7 +248,7 @@ border-radius: 15px;</string>
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>../icons/png/spoty3.png</pixmap>
+       <pixmap>../icons/png/imagen_spoty.png</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -426,7 +426,7 @@ QPushButton:hover{background-color: #4d514d;}</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../icons/png/lupa3.png</normaloff>../icons/png/lupa3.png</iconset>
+          <normaloff>../icons/png/buscar.png</normaloff>../icons/png/buscar.png</iconset>
         </property>
         <property name="flat">
          <bool>false</bool>
@@ -454,7 +454,7 @@ QPushButton:hover{background-color: #4d514d;}</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../icons/png/retroceder.png</normaloff>../icons/png/retroceder.png</iconset>
+          <normaloff>../icons/png/anterior.png</normaloff>../icons/png/anterior.png</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -475,7 +475,7 @@ QPushButton:hover{background-color: #4d514d;}</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../icons/png/pausa2.png</normaloff>../icons/png/pausa2.png</iconset>
+          <normaloff>../icons/png/pausa.png</normaloff>../icons/png/pausa.png</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -496,7 +496,7 @@ QPushButton:hover{background-color: #4d514d;}</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../icons/png/play2.png</normaloff>../icons/png/play2.png</iconset>
+          <normaloff>../icons/png/play.png</normaloff>../icons/png/play.png</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -517,7 +517,7 @@ QPushButton:hover{background-color: #4d514d;}</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../icons/png/avanzar2.png</normaloff>../icons/png/avanzar2.png</iconset>
+          <normaloff>../icons/png/siguiente.png</normaloff>../icons/png/siguiente.png</iconset>
         </property>
         <property name="flat">
          <bool>true</bool>
