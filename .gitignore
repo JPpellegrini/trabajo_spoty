@@ -1,3 +1,5 @@
 .venv/
 
 app/.env
+
+app/ui/*.py
