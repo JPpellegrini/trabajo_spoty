@@ -9,6 +9,12 @@ from app.ui.principal import Ui_reproductor
 class busquedaDTO:
     consulta: str
 
+
+class cancionDTO:
+    nombre: str
+    artista: str
+
+
 class VistaPrincipal(QtWidgets.QMainWindow):
 
     buscar = QtCore.pyqtSignal()
