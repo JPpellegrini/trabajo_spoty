@@ -5,10 +5,12 @@ from urllib.parse import urlencode
 import requests
 from dotenv import load_dotenv
 
+from .server import Server
+
 
 load_dotenv()
 CLIENT_ID = getenv("CLIENT_ID")
-CLIENT_SECRET = getenv("CLIENTE_SECRET")
+CLIENT_SECRET = getenv("CLIENT_SECRET")
 REDIRECT_URI = getenv("REDIRECT_URI")
 
 
@@ -44,3 +46,15 @@ class Spotify:
             client_secret=CLIENT_SECRET,
         )
         response = requests.post(url, data)
+
+
+class Service:
+    def solicitar_permisos(self):
+        server = Server()
+        Spotify.autorizar_usuario()
+        server.activate()
+
+        if server.code:
+            return server.code
+        if server.error:
+            raise Exception(str(server.error))
