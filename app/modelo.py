@@ -68,6 +68,18 @@ class Spotify:
         )
         response = requests.post(url, data)
         return response.json()
+    
+    def buscar_canciones(token, consulta):
+        url = "https://api.spotify.com/v1/search"
+        header=dict(
+            Authorization=f"Bearer {token}"
+        )
+        data = dict(
+            q=consulta.replace(" ", "+"),
+            type="track",
+        )
+        response = requests.get(url, data, headers=header)
+        return response.json()
 
 
 class Service:
@@ -106,3 +118,4 @@ class Service:
 
         data = Spotify.actualizar_access_token(refresh_token)
         return data["access_token"]
+        
