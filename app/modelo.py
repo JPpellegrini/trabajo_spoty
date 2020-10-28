@@ -1,4 +1,5 @@
 import webbrowser
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from os import getenv, path
 from urllib.parse import urlencode
@@ -68,12 +69,10 @@ class Spotify:
         )
         response = requests.post(url, data)
         return response.json()
-    
+
     def buscar_canciones(token, consulta):
         url = "https://api.spotify.com/v1/search"
-        header=dict(
-            Authorization=f"Bearer {token}"
-        )
+        header = dict(Authorization=f"Bearer {token}")
         data = dict(
             q=consulta.replace(" ", "+"),
             type="track",
@@ -82,8 +81,19 @@ class Spotify:
         return response.json()
 
 
+@dataclass
+class CancionDTO:
+    nombre: str
+    artista: str
+
+
+@dataclass
+class BusquedaDTO:
+    consulta: str
+
+
 class Service:
-    def solicitar_permisos(self):
+    def __solicitar_permisos(self):
         server = Server()
         Spotify.autorizar_usuario()
         server.activate()
@@ -92,6 +102,16 @@ class Service:
             return server.code
         if server.error:
             raise Exception(str(server.error))
+
+    def __obtener_access_token(self):
+        try:
+            with open(".refresh_token", "r") as archivo:
+                refresh_token = archivo.read()
+        except FileNotFoundError:
+            raise Exception("Refresh token no generado")
+
+        data = Spotify.actualizar_access_token(refresh_token)
+        return data["access_token"]
 
     def almacenar_refresh_token(self):
         if path.isfile(".refresh_token"):
@@ -109,13 +129,14 @@ class Service:
         with open(".refresh_token", "w") as archivo:
             archivo.write(refresh_token)
 
-    def obtener_access_token(self):
-        try:
-            with open(".refresh_token", "r") as archivo:
-                refresh_token = archivo.read()
-        except FileNotFoundError:
-            raise Exception("Refresh token no generado")
+    def obtener_canciones(self, data: BusquedaDTO):
+        canciones = list()
+        access_token = self.__obtener_access_token()
+        busqueda = Spotify.buscar_canciones(access_token, data.consulta)
 
-        data = Spotify.actualizar_access_token(refresh_token)
-        return data["access_token"]
-        
+        for item in busqueda["tracks"]["items"]:
+            nombre = item["name"]
+            artista = item["artists"][0]["name"]
+            canciones.append(CancionDTO(nombre, artista))
+
+        return canciones
