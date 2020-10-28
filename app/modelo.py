@@ -14,6 +14,25 @@ CLIENT_SECRET = getenv("CLIENT_SECRET")
 REDIRECT_URI = getenv("REDIRECT_URI")
 
 
+class TokenCache:
+    def __init__(self):
+        self.next_refresh = None
+        self.data = None
+
+    def __call__(self, function):
+        def wrapper(*args, **kwargs):
+            if not self.data or datetime.now() >= self.next_refresh:
+                last_refresh = datetime.now()
+                self.data = function(*args, **kwargs)
+                self.next_refresh = last_refresh + timedelta(
+                    seconds=self.data["expires_in"]
+                )
+
+            return self.data
+
+        return wrapper
+
+
 class Spotify:
     def autorizar_usuario():
         url = "https://accounts.spotify.com/authorize"
@@ -37,6 +56,7 @@ class Spotify:
         response = requests.post(url, data)
         return response.json()
 
+    @TokenCache()
     def actualizar_access_token(token):
         url = "https://accounts.spotify.com/api/token"
         data = dict(
@@ -46,6 +66,7 @@ class Spotify:
             client_secret=CLIENT_SECRET,
         )
         response = requests.post(url, data)
+        return response.json()
 
 
 class Service:
