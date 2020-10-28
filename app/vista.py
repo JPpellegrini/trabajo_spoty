@@ -68,9 +68,18 @@ class VistaPrincipal(QtWidgets.QMainWindow):
     def on_clicked_siguiente(self):
         self.siguiente.emit()
 
+    def buscar_cancion(self):
+        return self.__ui.linea_buscador.text()
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     ventana = VistaPrincipal()
     ventana.show()
+
+    def on_buscar_cancion():
+        print(ventana.buscar_cancion())
+
+    ventana.buscar.connect(on_buscar_cancion)
+
     app.exec()
