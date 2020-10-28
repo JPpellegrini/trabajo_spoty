@@ -1,4 +1,5 @@
 import webbrowser
+from datetime import datetime, timedelta
 from os import getenv, path
 from urllib.parse import urlencode
 
@@ -95,3 +96,13 @@ class Service:
 
         with open(".refresh_token", "w") as archivo:
             archivo.write(refresh_token)
+
+    def obtener_access_token(self):
+        try:
+            with open(".refresh_token", "r") as archivo:
+                refresh_token = archivo.read()
+        except FileNotFoundError:
+            raise Exception("Refresh token no generado")
+
+        data = Spotify.actualizar_access_token(refresh_token)
+        return data["access_token"]
