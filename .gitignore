@@ -7,3 +7,5 @@ __pycache__/
 .vscode/
 
 app/ui/*.py
+
+.refresh_token

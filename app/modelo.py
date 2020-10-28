@@ -1,5 +1,5 @@
 import webbrowser
-from os import getenv
+from os import getenv, path
 from urllib.parse import urlencode
 
 import requests
@@ -58,3 +58,19 @@ class Service:
             return server.code
         if server.error:
             raise Exception(str(server.error))
+
+    def almacenar_refresh_token(self):
+        if path.isfile(".refresh_token"):
+            return
+
+        try:
+            code = self.solicitar_permisos()
+        except Exception:
+            return
+
+        data = Spotify.obtener_refresh_token(code)
+        refresh_token = data["refresh_token"]
+        access_token = data["access_token"]
+
+        with open(".refresh_token", "w") as archivo:
+            archivo.write(refresh_token)
