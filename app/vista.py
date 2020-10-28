@@ -1,7 +1,13 @@
+from dataclasses import dataclass
+
 from PyQt5 import QtCore, QtWidgets, QtGui
 
 from app.ui.principal import Ui_reproductor
 
+
+@dataclass
+class busquedaDTO:
+    consulta: str
 
 class VistaPrincipal(QtWidgets.QMainWindow):
 
@@ -69,7 +75,8 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         self.siguiente.emit()
 
     def buscar_cancion(self):
-        return self.__ui.linea_buscador.text()
+        consulta = self.__ui.linea_buscador.text()
+        return busquedaDTO(consulta)
 
 
 if __name__ == "__main__":
