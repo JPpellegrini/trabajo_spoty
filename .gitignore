@@ -1,3 +1,9 @@
 .venv/
 
-app/.env
+.env
+
+__pycache__/
+
+.vscode/
+
+app/ui/*.py
