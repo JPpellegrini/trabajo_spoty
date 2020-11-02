@@ -108,6 +108,11 @@ class BusquedaDTO:
     consulta: str
 
 
+@dataclass
+class DispositivoDTO:
+    nombre: str
+
+
 class Service:
     def __solicitar_permisos(self):
         server = Server()
