@@ -42,7 +42,7 @@ class Spotify:
             client_id=CLIENT_ID,
             response_type="code",
             redirect_uri=REDIRECT_URI,
-            scope = " ".join(
+            scope=" ".join(
                 [
                     "user-read-playback-state",
                 ]
@@ -84,7 +84,7 @@ class Spotify:
         )
         response = requests.get(url, data, headers=header)
         return response.json()
-    
+
     def buscar_dispositivo(token):
         url = "https://api.spotify.com/v1/me/player/devices"
         header = dict(Authorization=f"Bearer {token}")
@@ -159,3 +159,8 @@ class Service:
             raise BusquedaError
 
         return canciones
+
+    def obtener_dispositivos(self):
+        access_token = self.__obtener_access_token()
+        dispositivos = Spotify.buscar_dispositivo(access_token)
+        return dispositivos
