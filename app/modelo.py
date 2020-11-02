@@ -42,6 +42,11 @@ class Spotify:
             client_id=CLIENT_ID,
             response_type="code",
             redirect_uri=REDIRECT_URI,
+            scope = " ".join(
+                [
+                    "user-read-playback-state",
+                ]
+            ),
         )
         url += "?" + urlencode(parameters)
         webbrowser.open(url)
