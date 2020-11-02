@@ -166,6 +166,15 @@ class Service:
         return canciones
 
     def obtener_dispositivos(self):
+        dispositivos = list()
         access_token = self.__obtener_access_token()
-        dispositivos = Spotify.buscar_dispositivo(access_token)
+        dispositivos_disponibles = Spotify.buscar_dispositivo(access_token)
+
+        try:
+            for item in dispositivos_disponibles:
+                nombre_dispositivo = item["name"]
+                dispositivos.append(DispositivoDTO(nombre_dispositivo))
+        except KeyError:
+            raise DispositivoError
+
         return dispositivos
