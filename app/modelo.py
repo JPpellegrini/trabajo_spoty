@@ -79,6 +79,12 @@ class Spotify:
         )
         response = requests.get(url, data, headers=header)
         return response.json()
+    
+    def buscar_dispositivo(token):
+        url = "https://api.spotify.com/v1/me/player/devices"
+        header = dict(Authorization=f"Bearer {token}")
+        response = requests.get(url, headers=header)
+        return response.json()["devices"]
 
 
 class BusquedaError(Exception):
