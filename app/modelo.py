@@ -81,6 +81,11 @@ class Spotify:
         return response.json()
 
 
+class BusquedaError(Exception):
+    def __str__(self):
+        return "Busqueda sin resultados"
+
+
 @dataclass
 class CancionDTO:
     nombre: str
@@ -105,7 +110,7 @@ class Service:
 
     def __obtener_access_token(self):
         try:
-            with open(".refresh_token", "r") as archivo:
+            with open("app/.refresh_token", "r") as archivo:
                 refresh_token = archivo.read()
         except FileNotFoundError:
             raise Exception("Refresh token no generado")
@@ -114,11 +119,11 @@ class Service:
         return data["access_token"]
 
     def almacenar_refresh_token(self):
-        if path.isfile(".refresh_token"):
+        if path.isfile("app/.refresh_token"):
             return
 
         try:
-            code = self.solicitar_permisos()
+            code = self.__solicitar_permisos()
         except Exception:
             return
 
@@ -126,7 +131,7 @@ class Service:
         refresh_token = data["refresh_token"]
         access_token = data["access_token"]
 
-        with open(".refresh_token", "w") as archivo:
+        with open("app/.refresh_token", "w") as archivo:
             archivo.write(refresh_token)
 
     def obtener_canciones(self, data: BusquedaDTO):
@@ -134,9 +139,12 @@ class Service:
         access_token = self.__obtener_access_token()
         busqueda = Spotify.buscar_canciones(access_token, data.consulta)
 
-        for item in busqueda["tracks"]["items"]:
-            nombre = item["name"]
-            artista = item["artists"][0]["name"]
-            canciones.append(CancionDTO(nombre, artista))
+        try:
+            for item in busqueda["tracks"]["items"]:
+                nombre = item["name"]
+                artista = item["artists"][0]["name"]
+                canciones.append(CancionDTO(nombre, artista))
+        except KeyError:
+            raise BusquedaError
 
         return canciones

@@ -6,11 +6,12 @@ from app.ui.principal import Ui_reproductor
 
 
 @dataclass
-class busquedaDTO:
+class BusquedaDTO:
     consulta: str
 
 
-class cancionDTO:
+@dataclass
+class CancionDTO:
     nombre: str
     artista: str
 
@@ -80,9 +81,17 @@ class VistaPrincipal(QtWidgets.QMainWindow):
     def on_clicked_siguiente(self):
         self.siguiente.emit()
 
-    def buscar_cancion(self):
+    def obtener_busqueda(self):
         consulta = self.__ui.linea_buscador.text()
-        return busquedaDTO(consulta)
+        return BusquedaDTO(consulta)
+
+    def actualizar_lista(self, canciones: list):
+        for cancion in canciones:
+            row = f"{cancion.nombre} - {cancion.artista}"
+            self.__ui.lista.addItem(row)
+
+    def limpiar_lista(self):
+        self.__ui.lista.clear()
 
 
 if __name__ == "__main__":
