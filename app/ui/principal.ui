@@ -256,13 +256,6 @@ border-radius: 15px;</string>
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="combo_dispositivo">
-      <property name="placeholderText">
-       <string>Dispositivo</string>
-      </property>
-     </widget>
-    </item>
-    <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
        <widget class="QLineEdit" name="linea_buscador">
@@ -299,6 +292,55 @@ QPushButton:hover{background-color: #4d514d;}</string>
     </item>
     <item>
      <widget class="QListWidget" name="lista"/>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QComboBox" name="combo_dispositivo">
+        <property name="styleSheet">
+         <string notr="true">QComboBox
+{
+	color: rgb(131, 131, 131);
+	background-color: rgb(21, 21, 21);
+	selection-color: rgb(131, 131, 131);
+}
+QComboBox QListView
+{
+	border-style: none;
+    background-color:rgb(18, 18, 18);
+}</string>
+        </property>
+        <property name="placeholderText">
+         <string>Dispositivo</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="boton_actualizar">
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton
+{
+	color: rgb(131, 131, 131);
+	background-color: rgb(21, 21, 21);
+	selection-color: rgb(131, 131, 131);
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../../../../../Descargas/refresh-01-128.png</normaloff>../../../../../Descargas/refresh-01-128.png</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -473,6 +515,22 @@ QPushButton:hover{background-color: #4d514d;}</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>boton_actualizar</sender>
+   <signal>clicked()</signal>
+   <receiver>reproductor</receiver>
+   <slot>on_clicked_actualizar()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>319</x>
+     <y>435</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>on_clicked_buscar()</slot>
@@ -480,5 +538,6 @@ QPushButton:hover{background-color: #4d514d;}</string>
   <slot>on_clicked_pausa()</slot>
   <slot>on_clicked_play()</slot>
   <slot>on_clicked_siguiente()</slot>
+  <slot>on_clicked_actualizar()</slot>
  </slots>
 </ui>

@@ -16,6 +16,11 @@ class CancionDTO:
     artista: str
 
 
+@dataclass
+class DispositivoDTO:
+    nombre: str
+
+
 class VistaPrincipal(QtWidgets.QMainWindow):
 
     buscar = QtCore.pyqtSignal()
@@ -23,6 +28,7 @@ class VistaPrincipal(QtWidgets.QMainWindow):
     pausa = QtCore.pyqtSignal()
     play = QtCore.pyqtSignal()
     siguiente = QtCore.pyqtSignal()
+    actualizar = QtCore.pyqtSignal()
 
     def __init__(self):
         super().__init__()
@@ -65,6 +71,11 @@ class VistaPrincipal(QtWidgets.QMainWindow):
             QtGui.QPixmap("app/icons/png/siguiente.png"),
         )
         self.__ui.boton_siguiente.setIcon(self.__ui.icono_siguiente)
+        self.__ui.icono_actualizar = QtGui.QIcon()
+        self.__ui.icono_actualizar.addPixmap(
+            QtGui.QPixmap("app/icons/png/actualizar.png"),
+        )
+        self.__ui.boton_actualizar.setIcon(self.__ui.icono_actualizar)
 
     def on_clicked_buscar(self):
         self.buscar.emit()
@@ -80,18 +91,27 @@ class VistaPrincipal(QtWidgets.QMainWindow):
 
     def on_clicked_siguiente(self):
         self.siguiente.emit()
+    
+    def on_clicked_actualizar(self):
+        self.actualizar.emit()
+    
+    def __limpiar_lista(self):
+        self.__ui.lista.clear()
 
     def obtener_busqueda(self):
         consulta = self.__ui.linea_buscador.text()
         return BusquedaDTO(consulta)
 
-    def actualizar_lista(self, canciones: list):
-        for cancion in canciones:
-            row = f"{cancion.nombre} - {cancion.artista}"
-            self.__ui.lista.addItem(row)
-
-    def limpiar_lista(self):
-        self.__ui.lista.clear()
+    def actualizar_canciones(self, canciones: list = None):
+        self.__limpiar_lista()
+        if canciones:
+            for cancion in canciones:
+                row = f"{cancion.nombre} - {cancion.artista}"
+                self.__ui.lista.addItem(row)
+    
+    def actualizar_dispositivos(self, dispositivos: list):
+        for dispositivo in dispositivos:
+            self.__ui.combo_dispositivo.addItem(dispositivo.nombre)
 
 
 if __name__ == "__main__":

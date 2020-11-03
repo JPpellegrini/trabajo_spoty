@@ -12,7 +12,6 @@ class Controlador:
     def __on_buscar(self):
         self.modelo.almacenar_refresh_token()
 
-        self.vista.limpiar_lista()
         dto = self.vista.obtener_busqueda()
         busqueda = BusquedaDTO(dto.consulta)
 
@@ -21,9 +20,9 @@ class Controlador:
                 CancionDTO(cancion.nombre, cancion.artista)
                 for cancion in self.modelo.obtener_canciones(busqueda)
             ]
-            self.vista.actualizar_lista(canciones)
+            self.vista.actualizar_canciones(canciones)
         except BusquedaError:
-            return
+            self.vista.actualizar_canciones()
 
     def show_vista(self):
         self.vista.show()
