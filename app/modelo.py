@@ -100,6 +100,7 @@ class BusquedaError(Exception):
 
 @dataclass
 class CancionDTO:
+    id: str
     nombre: str
     artista: str
 
