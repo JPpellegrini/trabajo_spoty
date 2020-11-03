@@ -112,6 +112,7 @@ class BusquedaDTO:
 
 @dataclass
 class DispositivoDTO:
+    id: str
     nombre: str
 
 
