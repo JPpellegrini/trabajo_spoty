@@ -165,9 +165,10 @@ class Service:
 
         try:
             for item in busqueda["tracks"]["items"]:
+                id = item["artists"][0]["uri"]
                 nombre = item["name"]
                 artista = item["artists"][0]["name"]
-                canciones.append(CancionDTO(nombre, artista))
+                canciones.append(CancionDTO(id, nombre, artista))
         except KeyError:
             raise BusquedaError
 
