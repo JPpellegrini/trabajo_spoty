@@ -92,6 +92,16 @@ class Spotify:
         response = requests.get(url, headers=header)
         return response.json()["devices"]
 
+    def reproducir(token, device_id, tracks):
+        url = "https://api.spotify.com/v1/me/player/play"
+        header = dict(Authorization=f"Bearer {token}")
+        params = dict(
+            device_id=device_id
+        )
+        tracks=dict(
+            uris=tracks
+        )
+        requests.put(url, headers=header, params=params, json=tracks)
 
 class BusquedaError(Exception):
     def __str__(self):
