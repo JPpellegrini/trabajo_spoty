@@ -95,13 +95,10 @@ class Spotify:
     def reproducir(token, device_id, tracks):
         url = "https://api.spotify.com/v1/me/player/play"
         header = dict(Authorization=f"Bearer {token}")
-        params = dict(
-            device_id=device_id
-        )
-        tracks=dict(
-            uris=tracks
-        )
+        params = dict(device_id=device_id)
+        tracks = dict(uris=tracks)
         requests.put(url, headers=header, params=params, json=tracks)
+
 
 class BusquedaError(Exception):
     def __str__(self):
@@ -124,6 +121,7 @@ class BusquedaDTO:
 class DispositivoDTO:
     id: str
     nombre: str
+
 
 @dataclass
 class ReproduccionDTO:
@@ -198,3 +196,7 @@ class Service:
             raise DispositivoError
 
         return dispositivos
+
+    def reproducir_cancion(self, data: ReproduccionDTO):
+        access_token = self.__obtener_access_token()
+        Spotify.reproducir(access_token, data.id_dispositivo, data.id_cancion)
