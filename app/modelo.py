@@ -181,8 +181,9 @@ class Service:
 
         try:
             for item in dispositivos_disponibles:
+                id_dispositivo = item["id"]
                 nombre_dispositivo = item["name"]
-                dispositivos.append(DispositivoDTO(nombre_dispositivo))
+                dispositivos.append(DispositivoDTO(id_dispositivo, nombre_dispositivo))
         except KeyError:
             raise DispositivoError
 
