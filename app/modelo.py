@@ -45,6 +45,7 @@ class Spotify:
             scope=" ".join(
                 [
                     "user-read-playback-state",
+                    "user-modify-playback-state",
                 ]
             ),
         )
