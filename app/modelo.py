@@ -86,6 +86,19 @@ class BusquedaError(Exception):
         return "Busqueda sin resultados"
 
 
+class AccesoError(Exception):
+    def __init__(self, mensaje):
+        self.mensaje = mensaje
+    
+    def __str__(self):
+        return self.mensaje
+
+
+class TokenError(Exception):
+    def __str__(self):
+        return "Refresh token no generado"
+
+
 @dataclass
 class CancionDTO:
     nombre: str
@@ -106,14 +119,14 @@ class Service:
         if server.code:
             return server.code
         if server.error:
-            raise Exception(str(server.error))
+            raise AccesoError(str(server.error))
 
     def __obtener_access_token(self):
         try:
             with open("app/.refresh_token", "r") as archivo:
                 refresh_token = archivo.read()
         except FileNotFoundError:
-            raise Exception("Refresh token no generado")
+            raise TokenError
 
         data = Spotify.actualizar_access_token(refresh_token)
         return data["access_token"]
@@ -124,7 +137,7 @@ class Service:
 
         try:
             code = self.__solicitar_permisos()
-        except Exception:
+        except AccesoError:
             return
 
         data = Spotify.obtener_refresh_token(code)

@@ -1,4 +1,4 @@
-from .modelo import Service, BusquedaDTO, BusquedaError
+from .modelo import Service, BusquedaDTO, BusquedaError, TokenError
 from .vista import VistaPrincipal, CancionDTO
 
 
@@ -10,20 +10,19 @@ class Controlador:
         self.vista.buscar.connect(self.__on_buscar)
 
     def __on_buscar(self):
-        self.modelo.almacenar_refresh_token()
-
-        self.vista.limpiar_lista()
-        dto = self.vista.obtener_busqueda()
-        busqueda = BusquedaDTO(dto.consulta)
-
+        try:
+            self.modelo.almacenar_refresh_token()
+        except TokenError:
+            return
+            
         try:
             canciones = [
                 CancionDTO(cancion.nombre, cancion.artista)
                 for cancion in self.modelo.obtener_canciones(busqueda)
             ]
-            self.vista.actualizar_lista(canciones)
+            self.vista.actualizar_canciones(canciones)
         except BusquedaError:
-            return
+            self.vista.actualizar_canciones()
 
     def show_vista(self):
         self.vista.show()
