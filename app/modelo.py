@@ -42,6 +42,12 @@ class Spotify:
             client_id=CLIENT_ID,
             response_type="code",
             redirect_uri=REDIRECT_URI,
+            scope=" ".join(
+                [
+                    "user-read-playback-state",
+                    "user-modify-playback-state",
+                ]
+            ),
         )
         url += "?" + urlencode(parameters)
         webbrowser.open(url)
@@ -80,6 +86,19 @@ class Spotify:
         response = requests.get(url, data, headers=header)
         return response.json()
 
+    def buscar_dispositivo(token):
+        url = "https://api.spotify.com/v1/me/player/devices"
+        header = dict(Authorization=f"Bearer {token}")
+        response = requests.get(url, headers=header)
+        return response.json()["devices"]
+
+    def reproducir(token, device_id, tracks):
+        url = "https://api.spotify.com/v1/me/player/play"
+        header = dict(Authorization=f"Bearer {token}")
+        params = dict(device_id=device_id)
+        tracks = dict(uris=tracks)
+        requests.put(url, headers=header, params=params, json=tracks)
+
 
 class BusquedaError(Exception):
     def __str__(self):
@@ -101,6 +120,7 @@ class TokenError(Exception):
 
 @dataclass
 class CancionDTO:
+    id: str
     nombre: str
     artista: str
 
@@ -108,6 +128,18 @@ class CancionDTO:
 @dataclass
 class BusquedaDTO:
     consulta: str
+
+
+@dataclass
+class DispositivoDTO:
+    id: str
+    nombre: str
+
+
+@dataclass
+class ReproduccionDTO:
+    id_dispositivo: str
+    id_cancion: str
 
 
 class Service:
@@ -154,10 +186,30 @@ class Service:
 
         try:
             for item in busqueda["tracks"]["items"]:
+                id = item["artists"][0]["uri"]
                 nombre = item["name"]
                 artista = item["artists"][0]["name"]
-                canciones.append(CancionDTO(nombre, artista))
+                canciones.append(CancionDTO(id, nombre, artista))
         except KeyError:
             raise BusquedaError
 
         return canciones
+
+    def obtener_dispositivos(self):
+        dispositivos = list()
+        access_token = self.__obtener_access_token()
+        dispositivos_disponibles = Spotify.buscar_dispositivo(access_token)
+
+        try:
+            for item in dispositivos_disponibles:
+                id_dispositivo = item["id"]
+                nombre_dispositivo = item["name"]
+                dispositivos.append(DispositivoDTO(id_dispositivo, nombre_dispositivo))
+        except KeyError:
+            raise DispositivoError
+
+        return dispositivos
+
+    def reproducir_cancion(self, data: ReproduccionDTO):
+        access_token = self.__obtener_access_token()
+        Spotify.reproducir(access_token, data.id_dispositivo, data.id_cancion)
