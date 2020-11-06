@@ -12,12 +12,14 @@ class BusquedaDTO:
 
 @dataclass
 class CancionDTO:
+    id: str
     nombre: str
     artista: str
 
 
 @dataclass
 class DispositivoDTO:
+    id: str
     nombre: str
 
 
@@ -110,6 +112,7 @@ class VistaPrincipal(QtWidgets.QMainWindow):
                 self.__ui.lista.addItem(row)
     
     def actualizar_dispositivos(self, dispositivos: list):
+        self.__ui.combo_dispositivo.clear()
         for dispositivo in dispositivos:
             self.__ui.combo_dispositivo.addItem(dispositivo.nombre)
 
