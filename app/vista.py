@@ -71,6 +71,7 @@ class VistaPrincipal(QtWidgets.QMainWindow):
             QtGui.QPixmap("app/icons/png/siguiente.png"),
         )
         self.__ui.boton_siguiente.setIcon(self.__ui.icono_siguiente)
+
         self.__ui.icono_actualizar = QtGui.QIcon()
         self.__ui.icono_actualizar.addPixmap(
             QtGui.QPixmap("app/icons/png/actualizar.png"),
@@ -91,10 +92,10 @@ class VistaPrincipal(QtWidgets.QMainWindow):
 
     def on_clicked_siguiente(self):
         self.siguiente.emit()
-    
+
     def on_clicked_actualizar(self):
         self.actualizar.emit()
-    
+
     def __limpiar_lista(self):
         self.__ui.lista.clear()
 
@@ -108,7 +109,7 @@ class VistaPrincipal(QtWidgets.QMainWindow):
             for cancion in canciones:
                 row = f"{cancion.nombre} - {cancion.artista}"
                 self.__ui.lista.addItem(row)
-    
+
     def actualizar_dispositivos(self, dispositivos: list):
         for dispositivo in dispositivos:
             self.__ui.combo_dispositivo.addItem(dispositivo.nombre)
