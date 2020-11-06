@@ -336,7 +336,7 @@ QComboBox QListView
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../../../../../Descargas/refresh-01-128.png</normaloff>../../../../../Descargas/refresh-01-128.png</iconset>
+          <normaloff>../icons/png/actualizar.png</normaloff>../icons/png/actualizar.png</iconset>
         </property>
        </widget>
       </item>
