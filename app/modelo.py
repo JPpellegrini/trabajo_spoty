@@ -99,6 +99,11 @@ class Spotify:
         tracks = dict(uris=tracks)
         requests.put(url, headers=header, params=params, json=tracks)
 
+    def pausar(token, device_id):
+        url = "https://api.spotify.com/v1/me/player/pause"
+        header = dict(Authorization=f"Bearer {token}")
+        params = dict(device_id=device_id)
+        requests.put(url, headers=header, params=params)
 
 class BusquedaError(Exception):
     def __str__(self):
