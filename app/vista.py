@@ -29,12 +29,22 @@ class ReproduccionDTO:
     id_cancion: str
 
 
+@dataclass
+class PausarDTO:
+    id_dispositivo: str
+
+
+@dataclass
+class ReanudarDTO:
+    id_dispositivo: str
+
+
 class VistaPrincipal(QtWidgets.QMainWindow):
 
     buscar = QtCore.pyqtSignal()
     anterior = QtCore.pyqtSignal()
-    play = QtCore.pyqtSignal()
-    pausa = QtCore.pyqtSignal()
+    play = QtCore.pyqtSignal(object)
+    pausa = QtCore.pyqtSignal(object)
     reproducir = QtCore.pyqtSignal(object)
     siguiente = QtCore.pyqtSignal()
     actualizar = QtCore.pyqtSignal()
@@ -79,7 +89,11 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         self.buscar.emit()
 
     def on_clicked_pausa(self):
-        self.pausa.emit()
+        try:
+            id_dispositivo = self.__ui.combo_dispositivo.currentData().id
+        except AttributeError:
+            return
+        self.pausa.emit(PausarDTO(id_dispositivo))
 
     def on_clicked_reproducir(self):
         try:
@@ -90,7 +104,11 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         self.reproducir.emit(ReproduccionDTO(id_dispositivo, id_cancion))
 
     def on_clicked_play(self):
-        self.play.emit()
+        try:
+            id_dispositivo = self.__ui.combo_dispositivo.currentData().id
+        except AttributeError:
+            return
+        self.play.emit(ReanudarDTO(id_dispositivo))
 
     def on_clicked_actualizar(self):
         self.actualizar.emit()
