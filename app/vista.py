@@ -97,7 +97,10 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         self.pausa.emit()
 
     def on_clicked_reproducir(self):
-        id_dispositivo = self.__ui.combo_dispositivo.currentData().id
+        try:
+            id_dispositivo = self.__ui.combo_dispositivo.currentData().id
+        except AttributeError:
+            return
         id_cancion = self.__ui.lista.currentItem().data(1)
         self.reproducir.emit(ReproduccionDTO(id_dispositivo, id_cancion))
 
