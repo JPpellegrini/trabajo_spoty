@@ -186,7 +186,7 @@ class Service:
 
         try:
             for item in busqueda["tracks"]["items"]:
-                id = item["artists"][0]["uri"]
+                id = item["uri"]
                 nombre = item["name"]
                 artista = item["artists"][0]["name"]
                 canciones.append(CancionDTO(id, nombre, artista))
