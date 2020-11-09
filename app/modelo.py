@@ -142,6 +142,11 @@ class ReproduccionDTO:
     id_cancion: str
 
 
+@dataclass
+class PausarDTO:
+    id_dispositivo: str
+
+
 class Service:
     def __solicitar_permisos(self):
         server = Server()
