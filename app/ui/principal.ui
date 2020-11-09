@@ -345,27 +345,6 @@ QComboBox QListView
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="boton_anterior">
-        <property name="styleSheet">
-         <string notr="true">QPushButton{
-font-size: 15px;
-padding: 0.5em 1.2em;
-border-radius: 15px;}
-QPushButton:hover{background-color: #4d514d;}</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>../icons/png/anterior.png</normaloff>../icons/png/anterior.png</iconset>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="boton_pausa">
         <property name="styleSheet">
          <string notr="true">QPushButton{
@@ -407,27 +386,6 @@ QPushButton:hover{background-color: #4d514d;}</string>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QPushButton" name="boton_siguiente">
-        <property name="styleSheet">
-         <string notr="true">QPushButton{
-font-size: 15px;
-padding: 0.5em 1.2em;
-border-radius: 15px;}
-QPushButton:hover{background-color: #4d514d;}</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>../icons/png/siguiente.png</normaloff>../icons/png/siguiente.png</iconset>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
      </layout>
     </item>
    </layout>
@@ -444,22 +402,6 @@ QPushButton:hover{background-color: #4d514d;}</string>
     <hint type="sourcelabel">
      <x>307</x>
      <y>154</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>174</x>
-     <y>249</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>boton_anterior</sender>
-   <signal>clicked()</signal>
-   <receiver>reproductor</receiver>
-   <slot>on_clicked_anterior()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>48</x>
-     <y>472</y>
     </hint>
     <hint type="destinationlabel">
      <x>174</x>
@@ -491,22 +433,6 @@ QPushButton:hover{background-color: #4d514d;}</string>
    <hints>
     <hint type="sourcelabel">
      <x>216</x>
-     <y>472</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>174</x>
-     <y>249</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>boton_siguiente</sender>
-   <signal>clicked()</signal>
-   <receiver>reproductor</receiver>
-   <slot>on_clicked_siguiente()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>300</x>
      <y>472</y>
     </hint>
     <hint type="destinationlabel">

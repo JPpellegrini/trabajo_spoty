@@ -57,12 +57,6 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         )
         self.__ui.boton_buscar.setIcon(self.__ui.icono_lupa)
 
-        self.__ui.icono_anterior = QtGui.QIcon()
-        self.__ui.icono_anterior.addPixmap(
-            QtGui.QPixmap("app/icons/png/anterior.png"),
-        )
-        self.__ui.boton_anterior.setIcon(self.__ui.icono_anterior)
-
         self.__ui.icono_pausa = QtGui.QIcon()
         self.__ui.icono_pausa.addPixmap(
             QtGui.QPixmap("app/icons/png/pausa.png"),
@@ -75,12 +69,6 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         )
         self.__ui.boton_play.setIcon(self.__ui.icono_play)
 
-        self.__ui.icono_siguiente = QtGui.QIcon()
-        self.__ui.icono_siguiente.addPixmap(
-            QtGui.QPixmap("app/icons/png/siguiente.png"),
-        )
-        self.__ui.boton_siguiente.setIcon(self.__ui.icono_siguiente)
-
         self.__ui.icono_actualizar = QtGui.QIcon()
         self.__ui.icono_actualizar.addPixmap(
             QtGui.QPixmap("app/icons/png/actualizar.png"),
@@ -89,9 +77,6 @@ class VistaPrincipal(QtWidgets.QMainWindow):
 
     def on_clicked_buscar(self):
         self.buscar.emit()
-
-    def on_clicked_anterior(self):
-        self.anterior.emit()
 
     def on_clicked_pausa(self):
         self.pausa.emit()
@@ -103,9 +88,6 @@ class VistaPrincipal(QtWidgets.QMainWindow):
             return
         id_cancion = self.__ui.lista.currentItem().data(1)
         self.reproducir.emit(ReproduccionDTO(id_dispositivo, id_cancion))
-
-    def on_clicked_siguiente(self):
-        self.siguiente.emit()
 
     def on_clicked_play(self):
         self.play.emit()
