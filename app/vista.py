@@ -23,12 +23,19 @@ class DispositivoDTO:
     nombre: str
 
 
+@dataclass
+class ReproduccionDTO:
+    id_dispositivo: str
+    id_cancion: str
+
+
 class VistaPrincipal(QtWidgets.QMainWindow):
 
     buscar = QtCore.pyqtSignal()
     anterior = QtCore.pyqtSignal()
-    pausa = QtCore.pyqtSignal()
     play = QtCore.pyqtSignal()
+    pausa = QtCore.pyqtSignal()
+    reproducir = QtCore.pyqtSignal(object)
     siguiente = QtCore.pyqtSignal()
     actualizar = QtCore.pyqtSignal()
 
@@ -89,11 +96,16 @@ class VistaPrincipal(QtWidgets.QMainWindow):
     def on_clicked_pausa(self):
         self.pausa.emit()
 
-    def on_clicked_play(self):
-        self.play.emit()
+    def on_clicked_reproducir(self):
+        id_dispositivo = self.__ui.combo_dispositivo.currentData().id
+        id_cancion = self.__ui.lista.currentItem().data(1)
+        self.reproducir.emit(ReproduccionDTO(id_dispositivo, id_cancion))
 
     def on_clicked_siguiente(self):
         self.siguiente.emit()
+
+    def on_clicked_play(self):
+        self.play.emit()
 
     def on_clicked_actualizar(self):
         self.actualizar.emit()
@@ -109,13 +121,14 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         self.__limpiar_lista()
         if canciones:
             for cancion in canciones:
-                row = f"{cancion.nombre} - {cancion.artista}"
-                self.__ui.lista.addItem(row)
+                item = QtWidgets.QListWidgetItem(f"{cancion.nombre}-{cancion.artista}")
+                item.setData(1, cancion.id)
+                self.__ui.lista.addItem(item)
 
     def actualizar_dispositivos(self, dispositivos: list):
         self.__ui.combo_dispositivo.clear()
         for dispositivo in dispositivos:
-            self.__ui.combo_dispositivo.addItem(dispositivo.nombre)
+            self.__ui.combo_dispositivo.addItem(dispositivo.nombre, dispositivo)
 
 
 if __name__ == "__main__":

@@ -531,12 +531,28 @@ QPushButton:hover{background-color: #4d514d;}</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>lista</sender>
+   <signal>itemDoubleClicked(QListWidgetItem*)</signal>
+   <receiver>reproductor</receiver>
+   <slot>on_clicked_reproducir()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>174</x>
+     <y>297</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>on_clicked_buscar()</slot>
   <slot>on_clicked_anterior()</slot>
   <slot>on_clicked_pausa()</slot>
-  <slot>on_clicked_play()</slot>
+  <slot>on_clicked_reproducir()</slot>
   <slot>on_clicked_siguiente()</slot>
   <slot>on_clicked_actualizar()</slot>
  </slots>
