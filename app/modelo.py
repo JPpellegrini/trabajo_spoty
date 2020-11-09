@@ -118,6 +118,7 @@ class Spotify:
         tracks = dict(uris=tracks, position_ms=posicion)
         requests.put(url, headers=header, params=params, json=tracks)
 
+
 class BusquedaError(Exception):
     def __str__(self):
         return "Busqueda sin resultados"
@@ -240,3 +241,8 @@ class Service:
     def pausar_cancion(self, data: PausarDTO):
         access_token = self.__obtener_access_token()
         Spotify.pausar(access_token, data.id_dispositivo)
+
+    def reanudar_cancion(self, data: ReproduccionDTO):
+        access_token = self.__obtener_access_token()
+        posicion = Spotify.obtener_posicion(access_token)
+        Spotify.reanudar(access_token, data.id_dispositivo, data.id_cancion, posicion)
