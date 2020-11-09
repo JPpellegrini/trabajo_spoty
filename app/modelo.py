@@ -96,7 +96,7 @@ class Spotify:
         url = "https://api.spotify.com/v1/me/player/play"
         header = dict(Authorization=f"Bearer {token}")
         params = dict(device_id=device_id)
-        tracks = dict(uris=tracks)
+        tracks = dict(uris=[tracks])
         requests.put(url, headers=header, params=params, json=tracks)
 
 
