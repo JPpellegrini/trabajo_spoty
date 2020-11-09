@@ -96,7 +96,7 @@ class Spotify:
         url = "https://api.spotify.com/v1/me/player/play"
         header = dict(Authorization=f"Bearer {token}")
         params = dict(device_id=device_id)
-        tracks = dict(uris=tracks)
+        tracks = dict(uris=[tracks])
         requests.put(url, headers=header, params=params, json=tracks)
 
 
@@ -186,7 +186,7 @@ class Service:
 
         try:
             for item in busqueda["tracks"]["items"]:
-                id = item["artists"][0]["uri"]
+                id = item["uri"]
                 nombre = item["name"]
                 artista = item["artists"][0]["name"]
                 canciones.append(CancionDTO(id, nombre, artista))
