@@ -111,12 +111,12 @@ class Spotify:
         response = requests.get(url, headers=header)
         return response.json()["progress_ms"]
 
-    def reanudar(token, device_id, tracks, posicion):
+    def reanudar(token, device_id, posicion):
         url = "https://api.spotify.com/v1/me/player/play"
         header = dict(Authorization=f"Bearer {token}")
         params = dict(device_id=device_id)
-        tracks = dict(uris=tracks, position_ms=posicion)
-        requests.put(url, headers=header, params=params, json=tracks)
+        position = dict(position_ms=posicion)
+        requests.put(url, headers=header, params=params, json=position)
 
 
 class BusquedaError(Exception):
@@ -163,6 +163,11 @@ class ReproduccionDTO:
 
 @dataclass
 class PausarDTO:
+    id_dispositivo: str
+
+
+@dataclass
+class ReanudarDTO:
     id_dispositivo: str
 
 
@@ -242,7 +247,7 @@ class Service:
         access_token = self.__obtener_access_token()
         Spotify.pausar(access_token, data.id_dispositivo)
 
-    def reanudar_cancion(self, data: ReproduccionDTO):
+    def reanudar_cancion(self, data: ReanudarDTO):
         access_token = self.__obtener_access_token()
         posicion = Spotify.obtener_posicion(access_token)
-        Spotify.reanudar(access_token, data.id_dispositivo, data.id_cancion, posicion)
+        Spotify.reanudar(access_token, data.id_dispositivo, posicion)

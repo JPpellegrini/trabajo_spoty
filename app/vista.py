@@ -29,12 +29,22 @@ class ReproduccionDTO:
     id_cancion: str
 
 
+@dataclass
+class PausarDTO:
+    id_dispositivo: str
+
+
+@dataclass
+class ReanudarDTO:
+    id_dispositivo: str
+
+
 class VistaPrincipal(QtWidgets.QMainWindow):
 
     buscar = QtCore.pyqtSignal()
     anterior = QtCore.pyqtSignal()
-    play = QtCore.pyqtSignal()
-    pausa = QtCore.pyqtSignal()
+    play = QtCore.pyqtSignal(object)
+    pausa = QtCore.pyqtSignal(object)
     reproducir = QtCore.pyqtSignal(object)
     siguiente = QtCore.pyqtSignal()
     actualizar = QtCore.pyqtSignal()
@@ -57,12 +67,6 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         )
         self.__ui.boton_buscar.setIcon(self.__ui.icono_lupa)
 
-        self.__ui.icono_anterior = QtGui.QIcon()
-        self.__ui.icono_anterior.addPixmap(
-            QtGui.QPixmap("app/icons/png/anterior.png"),
-        )
-        self.__ui.boton_anterior.setIcon(self.__ui.icono_anterior)
-
         self.__ui.icono_pausa = QtGui.QIcon()
         self.__ui.icono_pausa.addPixmap(
             QtGui.QPixmap("app/icons/png/pausa.png"),
@@ -75,12 +79,6 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         )
         self.__ui.boton_play.setIcon(self.__ui.icono_play)
 
-        self.__ui.icono_siguiente = QtGui.QIcon()
-        self.__ui.icono_siguiente.addPixmap(
-            QtGui.QPixmap("app/icons/png/siguiente.png"),
-        )
-        self.__ui.boton_siguiente.setIcon(self.__ui.icono_siguiente)
-
         self.__ui.icono_actualizar = QtGui.QIcon()
         self.__ui.icono_actualizar.addPixmap(
             QtGui.QPixmap("app/icons/png/actualizar.png"),
@@ -90,22 +88,27 @@ class VistaPrincipal(QtWidgets.QMainWindow):
     def on_clicked_buscar(self):
         self.buscar.emit()
 
-    def on_clicked_anterior(self):
-        self.anterior.emit()
-
     def on_clicked_pausa(self):
-        self.pausa.emit()
+        try:
+            id_dispositivo = self.__ui.combo_dispositivo.currentData().id
+        except AttributeError:
+            return
+        self.pausa.emit(PausarDTO(id_dispositivo))
 
     def on_clicked_reproducir(self):
-        id_dispositivo = self.__ui.combo_dispositivo.currentData().id
+        try:
+            id_dispositivo = self.__ui.combo_dispositivo.currentData().id
+        except AttributeError:
+            return
         id_cancion = self.__ui.lista.currentItem().data(1)
         self.reproducir.emit(ReproduccionDTO(id_dispositivo, id_cancion))
 
-    def on_clicked_siguiente(self):
-        self.siguiente.emit()
-
     def on_clicked_play(self):
-        self.play.emit()
+        try:
+            id_dispositivo = self.__ui.combo_dispositivo.currentData().id
+        except AttributeError:
+            return
+        self.play.emit(ReanudarDTO(id_dispositivo))
 
     def on_clicked_actualizar(self):
         self.actualizar.emit()
