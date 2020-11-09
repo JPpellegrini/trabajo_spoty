@@ -105,6 +105,18 @@ class Spotify:
         params = dict(device_id=device_id)
         requests.put(url, headers=header, params=params)
 
+    def obtener_posicion(token):
+        url = "https://api.spotify.com/v1/me/player"
+        header = dict(Authorization=f"Bearer {token}")
+        response = requests.get(url, headers=header)
+        return response.json()["progress_ms"]
+
+    def reanudar(token, device_id, tracks, posicion):
+        url = "https://api.spotify.com/v1/me/player/play"
+        header = dict(Authorization=f"Bearer {token}")
+        params = dict(device_id=device_id)
+        tracks = dict(uris=tracks, position_ms=posicion)
+        requests.put(url, headers=header, params=params, json=tracks)
 
 class BusquedaError(Exception):
     def __str__(self):
