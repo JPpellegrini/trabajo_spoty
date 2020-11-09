@@ -99,6 +99,25 @@ class Spotify:
         tracks = dict(uris=[tracks])
         requests.put(url, headers=header, params=params, json=tracks)
 
+    def pausar(token, device_id):
+        url = "https://api.spotify.com/v1/me/player/pause"
+        header = dict(Authorization=f"Bearer {token}")
+        params = dict(device_id=device_id)
+        requests.put(url, headers=header, params=params)
+
+    def obtener_posicion(token):
+        url = "https://api.spotify.com/v1/me/player"
+        header = dict(Authorization=f"Bearer {token}")
+        response = requests.get(url, headers=header)
+        return response.json()["progress_ms"]
+
+    def reanudar(token, device_id, tracks, posicion):
+        url = "https://api.spotify.com/v1/me/player/play"
+        header = dict(Authorization=f"Bearer {token}")
+        params = dict(device_id=device_id)
+        tracks = dict(uris=tracks, position_ms=posicion)
+        requests.put(url, headers=header, params=params, json=tracks)
+
 
 class BusquedaError(Exception):
     def __str__(self):
@@ -108,7 +127,7 @@ class BusquedaError(Exception):
 class AccesoError(Exception):
     def __init__(self, mensaje):
         self.mensaje = mensaje
-    
+
     def __str__(self):
         return self.mensaje
 
@@ -140,6 +159,11 @@ class DispositivoDTO:
 class ReproduccionDTO:
     id_dispositivo: str
     id_cancion: str
+
+
+@dataclass
+class PausarDTO:
+    id_dispositivo: str
 
 
 class Service:
@@ -213,3 +237,12 @@ class Service:
     def reproducir_cancion(self, data: ReproduccionDTO):
         access_token = self.__obtener_access_token()
         Spotify.reproducir(access_token, data.id_dispositivo, data.id_cancion)
+
+    def pausar_cancion(self, data: PausarDTO):
+        access_token = self.__obtener_access_token()
+        Spotify.pausar(access_token, data.id_dispositivo)
+
+    def reanudar_cancion(self, data: ReproduccionDTO):
+        access_token = self.__obtener_access_token()
+        posicion = Spotify.obtener_posicion(access_token)
+        Spotify.reanudar(access_token, data.id_dispositivo, data.id_cancion, posicion)
