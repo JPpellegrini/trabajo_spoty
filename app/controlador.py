@@ -1,4 +1,4 @@
-from .modelo import Service, BusquedaDTO, BusquedaError, TokenError, ReproduccionDTO
+from .modelo import Service, BusquedaDTO, BusquedaError, TokenError, ReproduccionDTO, PausarDTO, ReanudarDTO
 from .vista import VistaPrincipal, CancionDTO, DispositivoDTO
 
 
@@ -9,9 +9,10 @@ class Controlador:
 
         self.__vista = VistaPrincipal()
         self.__vista.buscar.connect(self.__on_buscar)
-        # self.__vista.play.connect(self.__on_play)
         self.__vista.actualizar.connect(self.__on_actualizar)
         self.__vista.reproducir.connect(self.__on_reproducir)
+        self.__vista.play.connect(self.__on_play)
+        self.__vista.pausa.connect(self.__on_pausa)
         self.__vista.actualizar.emit()
         
 
@@ -39,6 +40,14 @@ class Controlador:
         self.__modelo.reproducir_cancion(
             ReproduccionDTO(data.id_dispositivo, data.id_cancion)
         )
+
+    def __on_play(self, data):
+        self.__modelo.reanudar_cancion(
+            ReanudarDTO(data.id_dispositivo)
+        )
+
+    def __on_pausa(self, data):
+        self.__modelo.pausar_cancion(PausarDTO(data.id_dispositivo))
 
     def show_vista(self):
         self.__vista.show()
