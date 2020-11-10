@@ -67,12 +67,6 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         )
         self.__ui.boton_buscar.setIcon(self.__ui.icono_lupa)
 
-        self.__ui.icono_pausa = QtGui.QIcon()
-        self.__ui.icono_pausa.addPixmap(
-            QtGui.QPixmap("app/icons/png/pausa.png"),
-        )
-        self.__ui.boton_pausa.setIcon(self.__ui.icono_pausa)
-
         self.__ui.icono_play = QtGui.QIcon()
         self.__ui.icono_play.addPixmap(
             QtGui.QPixmap("app/icons/png/play.png"),
@@ -87,13 +81,6 @@ class VistaPrincipal(QtWidgets.QMainWindow):
 
     def on_clicked_buscar(self):
         self.buscar.emit()
-
-    def on_clicked_pausa(self):
-        try:
-            id_dispositivo = self.__ui.combo_dispositivo.currentData().id
-        except AttributeError:
-            return
-        self.pausa.emit(PausarDTO(id_dispositivo))
 
     def on_clicked_reproducir(self):
         try:
