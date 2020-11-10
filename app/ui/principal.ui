@@ -472,6 +472,22 @@ QPushButton:hover{background-color: #4d514d;}</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>linea_buscador</sender>
+   <signal>returnPressed()</signal>
+   <receiver>reproductor</receiver>
+   <slot>on_clicked_buscar()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>139</x>
+     <y>154</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>on_clicked_buscar()</slot>
