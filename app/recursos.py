@@ -101,15 +101,8 @@ class Spotify:
         params = dict(device_id=device_id)
         requests.put(url, headers=header, params=params)
 
-    def obtener_posicion(token):
-        url = "https://api.spotify.com/v1/me/player"
-        header = dict(Authorization=f"Bearer {token}")
-        response = requests.get(url, headers=header)
-        return response.json()["progress_ms"]
-
-    def reanudar(token, device_id, posicion):
+    def reanudar(token, device_id):
         url = "https://api.spotify.com/v1/me/player/play"
         header = dict(Authorization=f"Bearer {token}")
         params = dict(device_id=device_id)
-        position = dict(position_ms=posicion)
-        requests.put(url, headers=header, params=params, json=position)
+        requests.put(url, headers=header, params=params)

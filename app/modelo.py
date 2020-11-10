@@ -1,8 +1,10 @@
 from dataclasses import dataclass
 from os import path
+from threading import Thread
 
 from .server import Server
 from .recursos import Spotify
+
 
 class BusquedaError(Exception):
     def __str__(self):
@@ -126,13 +128,17 @@ class Service:
 
     def reproducir_cancion(self, data: ReproduccionDTO):
         access_token = self.__obtener_access_token()
-        Spotify.reproducir(access_token, data.id_dispositivo, data.id_cancion)
+        Thread(
+            target=Spotify.reproducir,
+            args=(access_token, data.id_dispositivo, data.id_cancion),
+        ).start()
 
     def pausar_cancion(self, data: PausarDTO):
         access_token = self.__obtener_access_token()
-        Spotify.pausar(access_token, data.id_dispositivo)
+        Thread(target=Spotify.pausar, args=(access_token, data.id_dispositivo)).start()
 
     def reanudar_cancion(self, data: ReanudarDTO):
         access_token = self.__obtener_access_token()
-        posicion = Spotify.obtener_posicion(access_token)
-        Spotify.reanudar(access_token, data.id_dispositivo, posicion)
+        Thread(
+            target=Spotify.reanudar, args=(access_token, data.id_dispositivo)
+        ).start()
