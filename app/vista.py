@@ -83,22 +83,26 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         self.buscar.emit()
 
     def on_clicked_reproducir(self):
-        try:
-            id_dispositivo = self.__ui.combo_dispositivo.currentData().id
-        except AttributeError:
+        id_dispositivo = self.__obtener_dispositivo()
+        if not id_dispositivo:
             return
         id_cancion = self.__ui.lista.currentItem().data(1)
         self.reproducir.emit(ReproduccionDTO(id_dispositivo, id_cancion))
 
     def on_clicked_play(self):
-        try:
-            id_dispositivo = self.__ui.combo_dispositivo.currentData().id
-        except AttributeError:
+        id_dispositivo = self.__obtener_dispositivo()
+        if not id_dispositivo:
             return
         self.play.emit(ReanudarDTO(id_dispositivo))
 
     def on_clicked_actualizar(self):
         self.actualizar.emit()
+
+    def __obtener_dispositivo(self):
+        try:
+            return self.__ui.combo_dispositivo.currentData().id
+        except AttributeError:
+            return
 
     def __limpiar_lista(self):
         self.__ui.lista.clear()
