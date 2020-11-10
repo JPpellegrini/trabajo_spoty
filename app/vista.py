@@ -57,6 +57,8 @@ class VistaPrincipal(QtWidgets.QMainWindow):
     def __setupUi(self):
         self.__ui.setupUi(self)
 
+        self.__id_cancion_actual = False
+
         self.__ui.imagen_principal.setPixmap(
             QtGui.QPixmap("app/icons/png/imagen_spoty.png")
         )
@@ -66,12 +68,6 @@ class VistaPrincipal(QtWidgets.QMainWindow):
             QtGui.QPixmap("app/icons/png/buscar.png"),
         )
         self.__ui.boton_buscar.setIcon(self.__ui.icono_lupa)
-
-        self.__ui.icono_pausa = QtGui.QIcon()
-        self.__ui.icono_pausa.addPixmap(
-            QtGui.QPixmap("app/icons/png/pausa.png"),
-        )
-        self.__ui.boton_pausa.setIcon(self.__ui.icono_pausa)
 
         self.__ui.icono_play = QtGui.QIcon()
         self.__ui.icono_play.addPixmap(
@@ -88,30 +84,60 @@ class VistaPrincipal(QtWidgets.QMainWindow):
     def on_clicked_buscar(self):
         self.buscar.emit()
 
-    def on_clicked_pausa(self):
-        try:
-            id_dispositivo = self.__ui.combo_dispositivo.currentData().id
-        except AttributeError:
-            return
-        self.pausa.emit(PausarDTO(id_dispositivo))
+    def on_clicked_lista(self):
+       self.__cambiar_boton()
+       self.__id_cancion_actual = True
 
     def on_clicked_reproducir(self):
-        try:
-            id_dispositivo = self.__ui.combo_dispositivo.currentData().id
-        except AttributeError:
+        id_dispositivo = self.__obtener_dispositivo()
+        if not id_dispositivo:
             return
-        id_cancion = self.__ui.lista.currentItem().data(1)
-        self.reproducir.emit(ReproduccionDTO(id_dispositivo, id_cancion))
+
+        self.__id_cancion_actual = self.__ui.lista.currentItem().data(1)
+        self.__cambiar_boton(True)
+        self.reproducir.emit(ReproduccionDTO(id_dispositivo, self.__id_cancion_actual))
 
     def on_clicked_play(self):
-        try:
-            id_dispositivo = self.__ui.combo_dispositivo.currentData().id
-        except AttributeError:
+        id_dispositivo = self.__obtener_dispositivo()
+        if not id_dispositivo:
             return
-        self.play.emit(ReanudarDTO(id_dispositivo))
+
+        if self.__ui.boton_play.isChecked():
+            self.__cambiar_boton(True)
+            if not self.__id_cancion_actual or self.__id_cancion_actual == self.__ui.lista.currentItem().data(1):
+                self.play.emit(ReanudarDTO(id_dispositivo))
+            else:
+                self.__id_cancion_actual = self.__ui.lista.currentItem().data(1)
+                self.reproducir.emit(ReproduccionDTO(id_dispositivo, self.__id_cancion_actual))
+
+        else:
+            self.__cambiar_boton()
+            self.pausa.emit(PausarDTO(id_dispositivo))
 
     def on_clicked_actualizar(self):
         self.actualizar.emit()
+
+    def __obtener_dispositivo(self):
+        try:
+            return self.__ui.combo_dispositivo.currentData().id
+        except AttributeError:
+            return
+
+    def __cambiar_boton(self, estado=False):
+        if estado:
+            self.__ui.boton_play.setChecked(estado)
+            self.__ui.icono_pausa = QtGui.QIcon()
+            self.__ui.icono_pausa.addPixmap(
+                QtGui.QPixmap("app/icons/png/pausa.png"),
+            )
+            self.__ui.boton_play.setIcon(self.__ui.icono_pausa)
+        else:
+            self.__ui.boton_play.setChecked(estado)
+            self.__ui.icono_play = QtGui.QIcon()
+            self.__ui.icono_play.addPixmap(
+                QtGui.QPixmap("app/icons/png/play.png"),
+            )
+            self.__ui.boton_play.setIcon(self.__ui.icono_play)
 
     def __limpiar_lista(self):
         self.__ui.lista.clear()

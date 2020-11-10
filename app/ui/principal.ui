@@ -344,27 +344,6 @@ QPushButton:hover{background-color: #4d514d;}</string>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="boton_pausa">
-        <property name="styleSheet">
-         <string notr="true">QPushButton{
-font-size: 15px;
-padding: 0.5em 1.2em;
-border-radius: 15px;}
-QPushButton:hover{background-color: #4d514d;}</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>../icons/png/pausa.png</normaloff>../icons/png/pausa.png</iconset>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="boton_play">
         <property name="styleSheet">
          <string notr="true">QPushButton{
@@ -379,6 +358,9 @@ QPushButton:hover{background-color: #4d514d;}</string>
         <property name="icon">
          <iconset>
           <normaloff>../icons/png/play.png</normaloff>../icons/png/play.png</iconset>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -409,24 +391,8 @@ QPushButton:hover{background-color: #4d514d;}</string>
    </hints>
   </connection>
   <connection>
-   <sender>boton_pausa</sender>
-   <signal>clicked()</signal>
-   <receiver>reproductor</receiver>
-   <slot>on_clicked_pausa()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>132</x>
-     <y>472</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>174</x>
-     <y>249</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>boton_play</sender>
-   <signal>clicked()</signal>
+   <signal>toggled(bool)</signal>
    <receiver>reproductor</receiver>
    <slot>on_clicked_play()</slot>
    <hints>
@@ -488,6 +454,22 @@ QPushButton:hover{background-color: #4d514d;}</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>lista</sender>
+   <signal>itemClicked(QListWidgetItem*)</signal>
+   <receiver>reproductor</receiver>
+   <slot>on_clicked_lista()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>174</x>
+     <y>292</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>on_clicked_buscar()</slot>
@@ -496,5 +478,6 @@ QPushButton:hover{background-color: #4d514d;}</string>
   <slot>on_clicked_reproducir()</slot>
   <slot>on_clicked_siguiente()</slot>
   <slot>on_clicked_actualizar()</slot>
+  <slot>on_clicked_lista()</slot>
  </slots>
 </ui>
