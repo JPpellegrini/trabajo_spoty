@@ -324,12 +324,11 @@ QComboBox QListView
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton
-{
-	color: rgb(131, 131, 131);
-	background-color: rgb(21, 21, 21);
-	selection-color: rgb(131, 131, 131);
-}</string>
+         <string notr="true">QPushButton{
+font-size: 15px;
+padding: 0.5em 1.2em;
+border-radius: 15px;}
+QPushButton:hover{background-color: #4d514d;}</string>
         </property>
         <property name="text">
          <string/>
@@ -466,6 +465,22 @@ QPushButton:hover{background-color: #4d514d;}</string>
     <hint type="sourcelabel">
      <x>174</x>
      <y>297</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>linea_buscador</sender>
+   <signal>returnPressed()</signal>
+   <receiver>reproductor</receiver>
+   <slot>on_clicked_buscar()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>139</x>
+     <y>154</y>
     </hint>
     <hint type="destinationlabel">
      <x>174</x>
