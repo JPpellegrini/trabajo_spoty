@@ -324,12 +324,11 @@ QComboBox QListView
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton
-{
-	color: rgb(131, 131, 131);
-	background-color: rgb(21, 21, 21);
-	selection-color: rgb(131, 131, 131);
-}</string>
+         <string notr="true">QPushButton{
+font-size: 15px;
+padding: 0.5em 1.2em;
+border-radius: 15px;}
+QPushButton:hover{background-color: #4d514d;}</string>
         </property>
         <property name="text">
          <string/>
