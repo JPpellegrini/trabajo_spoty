@@ -94,7 +94,7 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         if not id_dispositivo:
             return
 
-        self.__id_cancion_actual = self.__ui.lista.currentItem().data(1)
+        self.__id_cancion_actual = self.__ui.lista.currentItem().data(3)
         self.__cambiar_boton(True)
         self.reproducir.emit(ReproduccionDTO(id_dispositivo, self.__id_cancion_actual))
 
@@ -107,11 +107,11 @@ class VistaPrincipal(QtWidgets.QMainWindow):
             self.__cambiar_boton(True)
             if (
                 not self.__id_cancion_actual
-                or self.__id_cancion_actual == self.__ui.lista.currentItem().data(1)
+                or self.__id_cancion_actual == self.__ui.lista.currentItem().data(3)
             ):
                 self.play.emit(ReanudarDTO(id_dispositivo))
             else:
-                self.__id_cancion_actual = self.__ui.lista.currentItem().data(1)
+                self.__id_cancion_actual = self.__ui.lista.currentItem().data(3)
                 self.reproducir.emit(
                     ReproduccionDTO(id_dispositivo, self.__id_cancion_actual)
                 )
@@ -159,9 +159,9 @@ class VistaPrincipal(QtWidgets.QMainWindow):
                 item = QtWidgets.QListWidgetItem(
                     f"{cancion.nombre}\nAlbum: {cancion.album}\nArtista: {cancion.artista}\n"
                 )
-                item.setData(1, cancion.id)
+                item.setData(3, cancion.id)
                 self.__ui.lista.addItem(item)
-
+                
     def actualizar_dispositivos(self, dispositivos: list):
         self.__ui.combo_dispositivo.clear()
         for dispositivo in dispositivos:
