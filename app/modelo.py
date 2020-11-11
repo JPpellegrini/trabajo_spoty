@@ -29,6 +29,7 @@ class CancionDTO:
     id: str
     nombre: str
     artista: str
+    album: str
 
 
 @dataclass
@@ -105,7 +106,8 @@ class Service:
                 id = item["uri"]
                 nombre = item["name"]
                 artista = item["artists"][0]["name"]
-                canciones.append(CancionDTO(id, nombre, artista))
+                album = item["album"]["name"]
+                canciones.append(CancionDTO(id, nombre, artista, album))
         except KeyError:
             raise BusquedaError
 

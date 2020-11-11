@@ -22,7 +22,7 @@ class Controlador:
 
         try:
             canciones = [
-                CancionDTO(cancion.id, cancion.nombre, cancion.artista)
+                CancionDTO(cancion.id, cancion.nombre, cancion.artista, cancion.album)
                 for cancion in self.__modelo.obtener_canciones(busqueda)
             ]
             self.__vista.actualizar_canciones(canciones)

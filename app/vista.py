@@ -15,6 +15,7 @@ class CancionDTO:
     id: str
     nombre: str
     artista: str
+    album: str
 
 
 @dataclass
@@ -85,15 +86,15 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         self.buscar.emit()
 
     def on_clicked_lista(self):
-       self.__cambiar_boton()
-       self.__id_cancion_actual = True
+        self.__cambiar_boton()
+        self.__id_cancion_actual = True
 
     def on_clicked_reproducir(self):
         id_dispositivo = self.__obtener_dispositivo()
         if not id_dispositivo:
             return
 
-        self.__id_cancion_actual = self.__ui.lista.currentItem().data(1)
+        self.__id_cancion_actual = self.__ui.lista.currentItem().data(3)
         self.__cambiar_boton(True)
         self.reproducir.emit(ReproduccionDTO(id_dispositivo, self.__id_cancion_actual))
 
@@ -104,11 +105,16 @@ class VistaPrincipal(QtWidgets.QMainWindow):
 
         if self.__ui.boton_play.isChecked():
             self.__cambiar_boton(True)
-            if not self.__id_cancion_actual or self.__id_cancion_actual == self.__ui.lista.currentItem().data(1):
+            if (
+                not self.__id_cancion_actual
+                or self.__id_cancion_actual == self.__ui.lista.currentItem().data(3)
+            ):
                 self.play.emit(ReanudarDTO(id_dispositivo))
             else:
-                self.__id_cancion_actual = self.__ui.lista.currentItem().data(1)
-                self.reproducir.emit(ReproduccionDTO(id_dispositivo, self.__id_cancion_actual))
+                self.__id_cancion_actual = self.__ui.lista.currentItem().data(3)
+                self.reproducir.emit(
+                    ReproduccionDTO(id_dispositivo, self.__id_cancion_actual)
+                )
 
         else:
             self.__cambiar_boton()
@@ -150,10 +156,12 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         self.__limpiar_lista()
         if canciones:
             for cancion in canciones:
-                item = QtWidgets.QListWidgetItem(f"{cancion.nombre}-{cancion.artista}")
-                item.setData(1, cancion.id)
+                item = QtWidgets.QListWidgetItem(
+                    f"{cancion.nombre}\nAlbum: {cancion.album}\nArtista: {cancion.artista}\n"
+                )
+                item.setData(3, cancion.id)
                 self.__ui.lista.addItem(item)
-
+                
     def actualizar_dispositivos(self, dispositivos: list):
         self.__ui.combo_dispositivo.clear()
         for dispositivo in dispositivos:
