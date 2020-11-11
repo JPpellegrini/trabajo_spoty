@@ -86,7 +86,6 @@ class VistaPrincipal(QtWidgets.QMainWindow):
         self.buscar.emit()
 
     def on_clicked_lista(self):
-        self.__cambiar_boton()
         self.__id_cancion_actual = True
 
     def on_clicked_reproducir(self):
